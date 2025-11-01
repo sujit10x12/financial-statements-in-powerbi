@@ -225,7 +225,7 @@ I/S Subtotal = CALCULATE(
 )
 ```
 
-🔹**% of Revenue (staging)**
+🔹** % of Revenue (staging)**
 ```DAX
 Staging % of Revenue =
 VAR Revenue =
@@ -301,7 +301,7 @@ The Balance Sheet report in Power BI automates the calculation of assets, liabil
 ```DAX
 B/S Amount =
 CALCULATE(
-    [SumAmount],
+    ABS([SumAmount]),
     DimHeaders[Statement] = "Balance Sheet"
 )
 ```
@@ -310,7 +310,7 @@ CALCULATE(
 ```DAX
 Cumulative Amount =
 CALCULATE(
-    [B/S Amount],
+    ABS[B/S Amount]),
     FILTER(
         ALL(DimDate),
         DimDate[Date] <= MAX(DimDate[Date])
@@ -322,7 +322,7 @@ CALCULATE(
 ```DAX
 B/S Subtotal =
 CALCULATE(
-    [B/S Amount],
+    [Cumulative Amount],
     ALL(DimHeaders),
     DimHeaders[Balance Sheet Section] IN VALUES(DimHeaders[Balance Sheet Section])
 )
